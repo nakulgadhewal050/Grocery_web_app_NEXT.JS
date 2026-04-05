@@ -1,0 +1,109 @@
+"use client";
+import {
+  Facebook,
+  Instagram,
+  LinkedinIcon,
+  Mail,
+  MapPin,
+  Phone,
+  Twitter,
+} from "lucide-react";
+import { motion } from "motion/react";
+import Link from "next/link";
+import React from "react";
+
+function Footer() {
+  return (
+    <motion.div
+      initial={{ y: 40, opacity: 0 }}
+      whileInView={{ y: 0, opacity: 1 }}
+      viewport={{ once: true, amount: 0.3 }}
+      transition={{ duration: 0.5, ease: "easeInOut" }}
+      className="bg-linear-to-r from-green-600 to-green-700 text-white mt-20"
+    >
+      <div className="w-[90%] md:w-[80%] mx-auto py-10 grid grid-cols-1 md:grid-cols-3 gap-10 border-b border-green-300/40">
+        {/* About */}
+        <div>
+          <h2 className="text-2xl font-bold mb-4">SnapKart</h2>
+          <p className="text-sm text-green-100 leading-relaxed">
+            Your one-stop online grocery store, delivering fresh produce and
+            everyday essentials right to your doorstep. Experience hassle-free
+            shopping.
+          </p>
+        </div>
+
+        {/* Quick Links */}
+        <div>
+          <h2 className="text-xl font-semibold mb-3">Quick Links</h2>
+          <ul className="space-y-2 text-green-100 text-sm">
+            <li>
+              <Link
+                href="/"
+                className="hover:underline hover:text-white transition"
+              >
+                Home
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/cart"
+                className="hover:underline hover:text-white transition"
+              >
+                Products
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/contact"
+                className="hover:underline hover:text-white transition"
+              >
+                Contact
+              </Link>
+            </li>
+          </ul>
+        </div>
+
+        {/* Contact */}
+        <div>
+          <h3 className="text-xl font-semibold mb-3">Contact Us</h3>
+
+          <ul className="space-y-2 text-green-100 text-sm">
+            <li className="flex items-center gap-2">
+              <MapPin size={16} /> Mumbai, India
+            </li>
+
+            <li className="flex items-center gap-2">
+              <Phone size={16} /> +91 0000000000
+            </li>
+
+            <li className="flex items-center gap-2">
+              <Mail size={16} /> support@snapcart.in
+            </li>
+          </ul>
+
+          {/* Social Links */}
+          <div className="flex gap-4 mt-4">
+            <Link href="https://facebook.com" target="_blank">
+              <Facebook className="w-5 h-5 hover:text-white transition" />
+            </Link>
+
+            <Link href="https://instagram.com" target="_blank">
+              <Instagram className="w-5 h-5 hover:text-white transition" />
+            </Link>
+
+            <Link href="https://twitter.com" target="_blank">
+              <Twitter className="w-5 h-5 hover:text-white transition" />
+            </Link>
+          </div>
+        </div>
+      </div>
+
+      {/* Bottom Footer */}
+      <div className="text-center text-sm text-green-200 py-4">
+        © {new Date().getFullYear()} SnapKart. All rights reserved.
+      </div>
+    </motion.div>
+  );
+}
+
+export default Footer;
