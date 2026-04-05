@@ -32,6 +32,7 @@ function Page() {
   const router = useRouter()
   const { userData } = useSelector((state: RootState) => state.user);
   const { subTotal, deliveryFee, finalTotal, cartData } = useSelector((state: RootState) => state.cart);
+  const [loading, setLoading] = useState(false);
   const [address, setAddress] = useState({
     fullName: "",
     mobile: "",
@@ -118,6 +119,7 @@ function Page() {
   };
 
   const handleCodOrder = async () => {
+    setLoading(true);
     if (!position) {
       return null
     }
@@ -147,13 +149,16 @@ function Page() {
         },
         paymentMethod,
       })
+      setLoading(false);
       router.push("/user/order-success");
     } catch (error) {
       console.error("Error in placing order in checkout:", error);
+      setLoading(false);
     }
   }
 
   const handleOnlinePayment = async ()=> {
+    setLoading(true);
     if (!position) {
       return null
     }
@@ -184,8 +189,10 @@ function Page() {
         paymentMethod,
       })
       window.location.href = result.data.url
+      setLoading(false);
     } catch (error) {
       console.log("error in handleOnlinePayment error", error)
+      setLoading(false);
     }
   }
 
@@ -402,7 +409,7 @@ function Page() {
               }
             }}
           >
-            {paymentMethod === "cod" ? "Place Order" : "Proceed to Pay"}
+            {paymentMethod === "cod" ? (loading ? "Placing Order..." : "Place Order") : (loading ? "Redirecting..." : "Proceed to Pay")}
           </motion.button>
         </motion.div>
       </div>
